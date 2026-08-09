@@ -1,10 +1,14 @@
 # 🔬 ResearchMind — AI Research Agent
+## 🚀 Live Demo
+
+👉 [Try ResearchMind](https://researchmind-ai-research-agent-thcaycydegszugsifycray.streamlit.app/)
 
 > **Research, without the busywork.**
 
 ResearchMind is a **multi-agent AI research system** built with **LangChain and Streamlit**. It takes a research topic and coordinates specialized AI agents to search for recent information, extract deeper context, generate a structured research report, and critically review the final output.
 
 ---
+
 
 ## ✨ Features
 
