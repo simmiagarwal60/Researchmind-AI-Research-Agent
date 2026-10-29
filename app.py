@@ -511,7 +511,7 @@ if st.session_state.running and not st.session_state.done:
     st.rerun() if False else None   # keep inline for now
 
     # ── Step 2: Reader ──
-    with st.spinner("📄  Reader Agent is scraping top resources…"):
+    with st.spinner("📄  Reader At is scraping top resources…"):
         reader_agent = build_scrape_agent()
         rr = reader_agent.invoke({
             "messages": [("user",
