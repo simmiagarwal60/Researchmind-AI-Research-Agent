@@ -2,6 +2,7 @@ import streamlit as st
 import time
 from agents import build_scrape_agent, build_search_agent, writer_chain, critic_chain
 from langchain.agents import create_agent
+import httpx
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -498,9 +499,22 @@ if st.session_state.running and not st.session_state.done:
     # ── Step 1: Search ──
     with st.spinner("🔍  Search Agent is working…"):
         search_agent = build_search_agent()
+        import httpx
+
+    try:
         sr = search_agent.invoke({
-            "messages": [("user", f"Find recent, reliable and detailed information about: {topic_val}")]
-        })
+        "messages": [
+            ("user", f"Find recent, reliable and detailed information about: {topic_val}")
+        ]
+    })
+
+    except httpx.HTTPStatusError as e:
+        print("HTTP status:", e.response.status_code)
+        print("API response:", e.response.text)
+        st.error(
+            f"Research request failed (HTTP {e.response.status_code}). "
+            "Check the app logs for details."
+    )
         results["search"] = sr["messages"][-1].content
         st.session_state.results = dict(results)
     st.rerun() if False else None   # keep inline for now
